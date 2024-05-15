@@ -8,7 +8,24 @@ export default function WeatherCard(weather: any) {
 	const isValidMain = !!weather.weather.main;
 	const data = weather.weather;
 
-	const weatherIcons = {
+	type WeatherType =
+		| "Clear"
+		| "Clouds"
+		| "Rain"
+		| "Snow"
+		| "Drizzle"
+		| "Thunderstorm"
+		| "Mist"
+		| "Smoke"
+		| "Haze"
+		| "Dust"
+		| "Fog"
+		| "Sand"
+		| "Ash"
+		| "Squall"
+		| "Tornado";
+
+	const weatherIcons: Record<WeatherType, string> = {
 		Clear: "☀️",
 		Clouds: "☁️",
 		Rain: "🌧️",
@@ -26,7 +43,7 @@ export default function WeatherCard(weather: any) {
 		Tornado: "🌪️",
 	};
 
-	const getWeatherIcon = (main: any) => weatherIcons[main] || "🌍";
+	const getWeatherIcon = (main: WeatherType) => weatherIcons[main] || "🌍";
 
 	return (
 		<section className="flex flex-col gap-10 bg-white p-5 rounded-lg text-black w-full px-3 min-w-80 sm:min-w-96">
