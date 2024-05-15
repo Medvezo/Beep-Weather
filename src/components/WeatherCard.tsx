@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { WeatherType, weatherIcons } from "../lib/const";
 
 export default function WeatherCard(weather: any) {
 	useEffect(() => {
@@ -8,45 +9,10 @@ export default function WeatherCard(weather: any) {
 	const isValidMain = !!weather.weather.main;
 	const data = weather.weather;
 
-	type WeatherType =
-		| "Clear"
-		| "Clouds"
-		| "Rain"
-		| "Snow"
-		| "Drizzle"
-		| "Thunderstorm"
-		| "Mist"
-		| "Smoke"
-		| "Haze"
-		| "Dust"
-		| "Fog"
-		| "Sand"
-		| "Ash"
-		| "Squall"
-		| "Tornado";
-
-	const weatherIcons: Record<WeatherType, string> = {
-		Clear: "☀️",
-		Clouds: "☁️",
-		Rain: "🌧️",
-		Snow: "❄️",
-		Drizzle: "🌦️",
-		Thunderstorm: "⛈️",
-		Mist: "🌫️",
-		Smoke: "💨",
-		Haze: "🌫️",
-		Dust: "🌪️",
-		Fog: "🌫️",
-		Sand: "🏜️",
-		Ash: "🌋",
-		Squall: "🌬️",
-		Tornado: "🌪️",
-	};
-
 	const getWeatherIcon = (main: WeatherType) => weatherIcons[main] || "🌍";
 
 	return (
-		<section className="flex flex-col gap-10 bg-white p-5 rounded-lg text-black w-full px-3 min-w-80 sm:min-w-96">
+		<section className="flex flex-col gap-10 bg-white p-5 rounded-lg text-black w-full px-3 min-w-80 sm:min-w-96 sm:max-w-md">
 			<div className="flex sm:flex-row flex-col gap-10 sm:divide-x-2 divide-slate-950/80 p-5">
 				<div className="flex  justify-center items-center gap-5">
 					<h2 className="text-3xl">{data.name}</h2>
@@ -61,7 +27,7 @@ export default function WeatherCard(weather: any) {
 					</p>
 					{/* Using the function to get icon */}
 					<p className="text-xl font-bold">
-						{data.weather && data.weather[0].main}
+						{data.weather ? data.weather[0].main : "Enter your city name above"}
 					</p>
 				</aside>
 			</div>
