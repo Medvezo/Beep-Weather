@@ -1,17 +1,24 @@
 import { useState } from "react";
 import { getWeather } from "../utils/api";
+import React from "react";
 
-export default function SearchForm() {
+export default function SearchForm({
+	setWeather,
+}: {
+	setWeather: React.Dispatch<React.SetStateAction<any>>;
+}) {
 	const [search, setSearch] = useState<string>("");
 
 	const handleSearch = (e: any) => {
 		setSearch(e.target.value);
 	};
 
-	const handleSubmit = (e:any) => {
-		e.preventDefault()
-		getWeather(search);
-	}
+	const handleSubmit = async (e: any) => {
+		e.preventDefault(); // preventing refresh
+
+		const weatherData = await getWeather(search);
+		setWeather(weatherData);
+	};
 
 	return (
 		<form className="flex flex-col">
@@ -23,7 +30,10 @@ export default function SearchForm() {
 				value={search}
 				onChange={handleSearch}
 			/>
-			<button type="submit" onClick={handleSubmit}>Search</button>
+			<button type="submit" onClick={handleSubmit}>
+				Search
+			</button>
+
 		</form>
 	);
 }
