@@ -8,6 +8,26 @@ export default function WeatherCard(weather: any) {
 	const isValidMain = !!weather.weather.main;
 	const data = weather.weather;
 
+	const weatherIcons = {
+		Clear: "☀️",
+		Clouds: "☁️",
+		Rain: "🌧️",
+		Snow: "❄️",
+		Drizzle: "🌦️",
+		Thunderstorm: "⛈️",
+		Mist: "🌫️",
+		Smoke: "💨",
+		Haze: "🌫️",
+		Dust: "🌪️",
+		Fog: "🌫️",
+		Sand: "🏜️",
+		Ash: "🌋",
+		Squall: "🌬️",
+		Tornado: "🌪️",
+	};
+
+	const getWeatherIcon = (main:any) => weatherIcons[main] || "🌍";
+
 	return (
 		<section className="flex flex-col gap-10 bg-white p-5 rounded-lg text-black min-w-96">
 			<div className="flex gap-10 divide-x-2 divide-slate-950/80 p-5">
@@ -18,15 +38,13 @@ export default function WeatherCard(weather: any) {
 					</p>
 				</div>
 
-				<aside className="flex flex-col pl-10">
-					<div className="flex  gap-3 justify-center items-center">
-						<p>Icon</p>
-						<p className="text-xl font-bold">
-							{data.weather && data.weather[0].main}
-						</p>
-					</div>
-					<p className="text-sm">
-						{data.weather && data.weather[0].description}
+				<aside className="flex pl-10  gap-3 justify-center items-center">
+					<p className="text-5xl">
+						{data.weather && getWeatherIcon(data.weather[0].main)}
+					</p>
+					{/* Using the function to get icon */}
+					<p className="text-xl font-bold">
+						{data.weather && data.weather[0].main}
 					</p>
 				</aside>
 			</div>
