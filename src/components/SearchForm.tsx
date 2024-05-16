@@ -28,6 +28,7 @@ export default function SearchForm({
 
 		const weatherData = await getWeather(search);
 		setWeather(weatherData);
+		setSuggestions([]);
 	};
 
 	const handleSelect = (city: any) => {
@@ -54,7 +55,7 @@ export default function SearchForm({
 						name="weather"
 						value={search}
 						onChange={handleSearch}
-						className="p-2 border w-full  border-slate-300 rounded focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all duration-200 ease-in-out"
+						className="p-2 border w-full border-slate-300 rounded focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 focus:bg-slate-800 transition-all duration-200 ease-in-out"
 						placeholder="Prague"
 					/>
 					<AutoComplete suggestions={suggestions} onSelect={handleSelect} />
