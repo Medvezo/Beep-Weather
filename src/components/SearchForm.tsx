@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { getWeather } from "../utils/api";
 import React from "react";
+import AutoComplete from "./AutoComplete";
 
 export default function SearchForm({
 	setWeather,
@@ -9,8 +10,13 @@ export default function SearchForm({
 }) {
 	const [search, setSearch] = useState<string>("");
 
-	const handleSearch = (e: any) => {
-		setSearch(e.target.value);
+	const [suggestions, setSuggestions] = useState([]);
+
+	const handleSearch = async (e: any) => {
+		let value = e.target.value;
+		setSearch(value);
+
+		
 	};
 
 	const handleSubmit = async (e: any) => {
@@ -27,15 +33,18 @@ export default function SearchForm({
 				className="text-lg text-slate-950 font-semibold mb-2">
 				Enter a city name:
 			</label>
-			<input
-				type="text"
-				id="weather"
-				name="weather"
-				value={search}
-				onChange={handleSearch}
-				className="p-2 border border-slate-300 rounded focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all duration-200 ease-in-out mb-4"
-				placeholder="Prague"
-			/>
+			<div>
+				<input
+					type="text"
+					id="weather"
+					name="weather"
+					value={search}
+					onChange={handleSearch}
+					className="p-2 border border-slate-300 rounded focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all duration-200 ease-in-out mb-4"
+					placeholder="Prague"
+				/>
+				<AutoComplete suggestions={suggestions}/>
+			</div>
 			<button
 				type="submit"
 				onClick={handleSubmit}
