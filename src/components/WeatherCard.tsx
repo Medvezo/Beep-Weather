@@ -26,7 +26,7 @@ export default function WeatherCard(weather: any) {
 	const getWeatherIcon = (main: WeatherType) => weatherIcons[main] || "🌍";
 
 	return (
-		<section className="flex flex-col gap-10 bg-gradient-to-b from-80% from-white to-100% to-slate-200 p-5 rounded-lg text-black w-full px-3 min-w-80 sm:min-w-96 sm:max-w-md lg:max-w-lg ">
+		<section className="flex flex-col gap-10 mx-auto bg-gradient-to-b from-80% from-white to-100% to-slate-200 p-5 rounded-lg text-black w-full lg:w-1/2 px-3 sm:min-w-96   ">
 			<div className="flex sm:flex-row flex-col justify-center items-center gap-10 sm:divide-x-2 divide-slate-950/80 p-5">
 				{isValidMain ? (
 					<div className="flex justify-center items-center gap-5">
@@ -46,7 +46,7 @@ export default function WeatherCard(weather: any) {
 			</div>
 
 			{isValidMain && (
-				<aside className="flex justify-between items-center p-5 rounded-xl bg-slate-300 px-3 sm:flex-row flex-col gap-5 sm:gap-0 divide-y-2 sm:divide-x-2 sm:divide-y-0 divide-slate-600/30">
+				<aside className="flex justify-between items-center p-5 rounded-xl bg-slate-300 px-3 sm:flex-row flex-col gap-5 sm:gap-0 divide-y-2 sm:divide-y-0 divide-slate-600/30">
 					<div className="flex flex-col justify-center items-center p-1">
 						<p className="text-xl">🌡️ Feels like:</p>
 						<p className="text-lg font-bold">
