@@ -15,5 +15,6 @@ export async function getWeather(city: string) {
 
 	} catch (error) {
 		console.error(error);
+		return error
 	}
 }
