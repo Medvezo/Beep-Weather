@@ -1,6 +1,6 @@
 import axios from "axios";
-import React from "react";
 import { getLocalStorage, setLocalStorage } from "./localStorage";
+import { debounce } from "lodash";
 
 export async function getWeather(city: string) {
 	getLocalStorage(city);
@@ -24,28 +24,26 @@ export async function getWeather(city: string) {
 	}
 }
 
-export async function getSuggestions(
-	value: string,
-	setState: React.Dispatch<React.SetStateAction<any>>
-) {
-	if (value.length > 2) {
-		// Only fetch if input length > 2
-		try {
-			const response = await axios.get(
-				`https://test.api.amadeus.com/v1/reference-data/locations/cities?keyword=${value}&max=5`,
-				{
-					headers: {
-						Authorization: `Bearer ${import.meta.env.VITE_AMADEUS_KEY}`,
-					},
-				}
-			);
-			console.log(response.data)
-			setState(response.data.data);
-		} catch (error) {
-			console.error("Error fetching cities:", error);
-			setState([]);
-		}
-	} else {
-		setState([]);
-	}
-}
+export const fetchSuggestions = debounce(async (value, setSuggestions) => {
+    if (value.length > 2) {
+        // Only fetch if input length > 2
+        const options = {
+            method: "GET",
+            url: `https://wft-geo-db.p.rapidapi.com/v1/geo/cities?minPopulation=100000&namePrefix=${value}`,
+            headers: {
+                "X-RapidAPI-Key": import.meta.env.VITE_RAPID_API_KEY,
+                "X-RapidAPI-Host": import.meta.env.VITE_RAPID_API_HOST,
+            },
+        };
+
+        try {
+            const response = await axios.request(options);
+            setSuggestions(response.data.data);
+        } catch (error) {
+            console.error("Error fetching cities:", error);
+            setSuggestions([]);
+        }
+    } else {
+        setSuggestions([]);
+    }
+}, 500); // 500ms debounce delay

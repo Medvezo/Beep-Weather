@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { getWeather } from "../utils/api";
+import { useCallback, useState } from "react";
+import { fetchSuggestions, getWeather } from "../utils/api";
 import React from "react";
 import AutoComplete from "./AutoComplete";
 import { FaMagnifyingGlass } from "react-icons/fa6";
@@ -10,13 +10,18 @@ export default function SearchForm({
 	setWeather: React.Dispatch<React.SetStateAction<any>>;
 }) {
 	const [search, setSearch] = useState<string>("");
-
 	const [suggestions, setSuggestions] = useState([]);
 
 	const handleSearch = async (e: any) => {
-		let value = e.target.value;
+		const value = e.target.value;
 		setSearch(value);
+		debouncedFetchSuggestions(value);
 	};
+
+	const debouncedFetchSuggestions = useCallback(
+		(value: string) => fetchSuggestions(value, setSuggestions),
+		[]
+	);
 
 	const handleSubmit = async (e: any) => {
 		e.preventDefault(); // Preventing refresh
@@ -55,5 +60,5 @@ export default function SearchForm({
 				</button>
 			</div>
 		</form>
-	);	
+	);
 }
