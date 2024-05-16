@@ -31,22 +31,22 @@ export default function SearchForm({
 	};
 
 	return (
-		<form className="flex flex-col p-5 shadow-lg rounded-lg bg-gradient-to-b from-white  to-teal-500   max-w-md mx-auto mt-10">
+		<form className="flex flex-col gap-5 p-5 shadow-lg rounded-lg bg-gradient-to-b from-white from-60%  to-teal-500   max-w-md mx-auto mt-10">
 			<label
 				htmlFor="weather"
-				className="text-lg text-slate-950 font-semibold mb-2"
+				className="text-lg sm:text-2xl lg:text-xl text-slate-950 font-semibold "
 			>
 				Enter a city name:
 			</label>
 			<div className="flex justify-center items-center gap-1 ">
-				<div className="">
+				<div className="relative w-[300px] mx-auto">
 					<input
 						type="text"
 						id="weather"
 						name="weather"
 						value={search}
 						onChange={handleSearch}
-						className="p-2 border border-slate-300 rounded focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all duration-200 ease-in-out"
+						className="p-2 border w-full  border-slate-300 rounded focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all duration-200 ease-in-out"
 						placeholder="Prague"
 					/>
 					<AutoComplete suggestions={suggestions} />
