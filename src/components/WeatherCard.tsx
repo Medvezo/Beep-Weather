@@ -9,10 +9,15 @@ export default function WeatherCard(weather: any) {
 	const data = weather.weather;
 
 	useEffect(() => {
-		console.log(data.response);
+		// Error handling
+
 		if (data.response && data.response.status === 404) {
 			setStatusMessage("There is no such city");
 			toast.error("There is no such city");
+			
+		} else if (data.code === "ERR_NETWORK") {
+			toast.error(data.message);
+			setStatusMessage(data.message);
 		}
 	}, [data]);
 
@@ -21,7 +26,7 @@ export default function WeatherCard(weather: any) {
 	const getWeatherIcon = (main: WeatherType) => weatherIcons[main] || "🌍";
 
 	return (
-		<section className="flex flex-col gap-10 bg-white p-5 rounded-lg text-black w-full px-3 min-w-80 sm:min-w-96 sm:max-w-md">
+		<section className="flex flex-col gap-10 bg-gradient-to-b from-80% from-white to-100% to-slate-200 p-5 rounded-lg text-black w-full px-3 min-w-80 sm:min-w-96 sm:max-w-md lg:max-w-lg ">
 			<div className="flex sm:flex-row flex-col justify-center items-center gap-10 sm:divide-x-2 divide-slate-950/80 p-5">
 				{isValidMain ? (
 					<div className="flex justify-center items-center gap-5">

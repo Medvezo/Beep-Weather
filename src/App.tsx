@@ -8,7 +8,7 @@ function App() {
 	const [weather, setWeather] = useState("");
 
 	return (
-		<main className="flex flex-col justify-start items-center gap-10 sm:gap-16 mt-20 min-h-screen">
+		<main className="flex flex-col justify-start items-center gap-10 sm:gap-16 mt-6 2xl:mt-20 min-h-screen">
 			<SearchForm setWeather={setWeather} />
 			<WeatherCard weather={weather} />
 			<ToastContainer theme="colored"/>
