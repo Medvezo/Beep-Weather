@@ -1,5 +1,14 @@
-export default function AutoComplete({ suggestions }: { suggestions: any[] }) {
-	console.log(suggestions);
+export default function AutoComplete({
+	suggestions,
+	onSelect,
+}: {
+	suggestions: any[];
+	// eslint-disable-next-line no-unused-vars
+	onSelect: (city: any) => void;
+}) {
+	const handleSelect = (city: any) => {
+		onSelect(city);
+	};
 	return (
 		<>
 			{suggestions.length > 0 && (
@@ -8,6 +17,7 @@ export default function AutoComplete({ suggestions }: { suggestions: any[] }) {
 						<li
 							className="p-2 cursor-pointer text-black font-bold hover:bg-slate-200 transition-all duration-150 ease-in-out"
 							key={index}
+							onClick={() => handleSelect(city)}
 						>
 							{city.name + ", " + city.countryCode}
 						</li>

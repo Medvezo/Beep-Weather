@@ -30,8 +30,16 @@ export default function SearchForm({
 		setWeather(weatherData);
 	};
 
+	const handleSelect = (city: any) => {
+		setSearch(city.city);
+		setSuggestions([]);
+	};
+
 	return (
-		<form className="flex flex-col gap-5 p-5 shadow-lg rounded-lg bg-gradient-to-b from-white from-60%  to-teal-500   max-w-md mx-auto mt-10">
+		<form
+			className="flex flex-col gap-5 p-5 shadow-lg rounded-lg bg-gradient-to-b from-white from-60%  to-teal-500   max-w-md mx-auto mt-10"
+			onSubmit={handleSubmit}
+		>
 			<label
 				htmlFor="weather"
 				className="text-lg sm:text-2xl lg:text-xl text-slate-950 font-semibold "
@@ -49,11 +57,10 @@ export default function SearchForm({
 						className="p-2 border w-full  border-slate-300 rounded focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all duration-200 ease-in-out"
 						placeholder="Prague"
 					/>
-					<AutoComplete suggestions={suggestions} />
+					<AutoComplete suggestions={suggestions} onSelect={handleSelect} />
 				</div>
 				<button
 					type="submit"
-					onClick={handleSubmit}
 					className="bg-teal-700 text-white rounded p-2 hover:bg-teal-800 focus:outline-none focus:ring-2 focus:ring-teal-900 focus:ring-opacity-50 transition-all duration-150 ease-in-out"
 				>
 					<FaMagnifyingGlass className="w-6 h-6" />
